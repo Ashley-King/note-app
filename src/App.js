@@ -16,7 +16,7 @@ class App extends Component {
   }
   toggleNote = () => {
     this.setState({
-      showNote: ! this.setState.showNote
+      showNote: !this.setState.showNote
     });
   }
 
