@@ -11,7 +11,8 @@ class App extends Component {
     super();
     this.state = {
       showNote: false,
-      notes: []
+      notes: [],
+      note: {}
     };
   }
   toggleNote = () => {
@@ -26,8 +27,10 @@ getNotes = () => {
   .catch((err) => console.log(err.response.data));
 }
 
-getNote = () => {
-  console.log('clicked!');
+getNote = (id) => {
+  axios.get(urlFor(`notes/${id}`))
+  .then((res) => this.setState({notes: res.data, showNote: true}))
+  .catch((err) => console.log(err.response.data));
 }
 
   render() {
