@@ -22,6 +22,15 @@ class Note extends React.Component {
                     </i>
                 </span>
             );
+        } else {
+            return(
+                <form>
+                <input  type="text" 
+                        className="tag-input"
+                        placeholder="Tag Name..."
+                />
+                </form>
+            )
         }
     }
     render() {
