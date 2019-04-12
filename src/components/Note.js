@@ -12,38 +12,44 @@ class Note extends React.Component {
 
     onTagSubmit(e){
         e.preventDefault();
-        console.log(this.name.value);
-        this.props.closeTagForm();
+       const formData = {
+           name: this.name.value
+       };
+       this.props.submitTag(formData, this.props.note.id);
+       this.props.closeTagForm();
     }
 
-    renderTagForm(){
-        if(!this.props.newTag){
-            return (
-                <span>
-                    Tag your note:
-                    <i 
-                    className="tag-button material-icons"
-                    onClick={() => this.props.showTagForm()}>
-                        add circle
-                    </i>
-                </span>
-            );
-        } else {
-            return(
-                <form onSubmit={(e) => this.onTagSubmit(e)}>
-                <input  type="text" 
-                        className="tag-input"
-                        placeholder="Tag Name..."
-                        ref={(input) => this.name = input}
-                />
-                </form>
-            )
+    renderTagForm(note){
+        if(note.id !== undefined) {
+            if(!this.props.newTag){
+                return (
+                    <span>
+                        Tag your note:
+                        <i 
+                        className="tag-button material-icons"
+                        onClick={() => this.props.showTagForm()}>
+                            add circle
+                        </i>
+                    </span>
+                );
+            } else {
+                return(
+                    <form onSubmit={(e) => this.onTagSubmit(e)}>
+                    <input  type="text" 
+                            className="tag-input"
+                            placeholder="Tag Name..."
+                            ref={(input) => this.name = input}
+                    />
+                    </form>
+                );
+            }
         }
-    }
+        }
+        
     render() {
         const {note} = this.props;
-        return ( <
-            div className = "note-container" >
+        return ( 
+            <div className = "note-container" >
                 <form className="note-form" onSubmit= {(e) => this.onSubmit(e)}>
                     <input 
                         type="text" 
@@ -64,9 +70,12 @@ class Note extends React.Component {
                     value="Submit"
                     />
                 </form>
-                <div className="tag-button-container">
-                    {this.renderTagForm()}
+                <div className="tag-container">
+                    <div className="tag-button-container">
+                        {this.renderTagForm(note)}
+                    </div>
                 </div>
+                
             </div>
            
             
