@@ -60,6 +60,10 @@ deleteNote = (id) => {
 showTagForm = () => {
   this.setState({newTag: true});
 }
+
+closeTagForm = () => {
+  this.setState({newTag: false});
+}
   render() {
     const { showNote, notes, note, newTag } = this.state;
     return (
@@ -71,6 +75,7 @@ showTagForm = () => {
                         submitNote = {this.submitNote}
                         showTagForm={this.showTagForm}
                         newTag={newTag}
+                        closeTagForm={this.closeTagForm}
                       /> 
                       : 
                       <List 
